@@ -1,3 +1,25 @@
 #!/bin/bash
 pip install bash_kernel 
 python -m bash_kernel.install
+
+git clone https://github.com/mrirecon/bart/
+cd bart
+PARALLEL=1 make
+. startup.sh
+cd ..
+
+
+mkdir -p $HOME/.jupyter/
+mv jupyter_notebook_config.py $HOME/.jupyter/
+
+
+pip install jupyter_server_proxy
+jupyter serverextension enable --py jupyter_server_proxy
+
+export GDK_DISPLAY=broadway
+export BROADWAY_DISPLAY=:11
+
+git clone https://github.com/mrirecon/view/
+cd view
+make
+
